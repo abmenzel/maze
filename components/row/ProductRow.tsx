@@ -1,18 +1,9 @@
 import { IProduct } from '../../declarations/product.interface';
 import ProductCard from '../ProductCard';
+import products from '../../data/someProducts'
 
 export default (props) => {
     const {title} = props;
-    const image = {
-        url: "/sofa.png",
-        alt: "placeholder"
-    }
-
-    const location = {
-        name: "New Zealand",
-        url: "/new-zealand.png",
-        alt: "New Zealand"
-    }
 
     return (
         <div className="py-4">
@@ -20,9 +11,9 @@ export default (props) => {
                 <h2 className="font-bold text-4xl">{title}</h2>
             </div>
             <div className="flex">
-                <ProductCard title="Sola Sofa" price="499" location={location} image={image} />
-                <ProductCard title="Sola Sofa" price="4999" location={location} image={image} />
-                <ProductCard title="Nutritious Neutrons" price="4999" location={location} image={image} />
+                {products.map(product => {
+                    return <ProductCard product={product} />
+                })}
             </div>
         </div>
     )

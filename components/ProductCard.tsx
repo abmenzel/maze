@@ -1,18 +1,16 @@
-import Image from 'next/image'
-import Button from '../components/Button'
+import React, {useState} from 'react';
+import Image from 'next/image';
+import Button from '../components/Button';
+import { IProduct } from '../declarations/product.interface';
 
 export default (props) => {
-    const { title, price, vendor }: { title: string, price: string, vendor: string} = props;
+    const product: IProduct = props.product;
+    const {title, vendor, variants} = product;
+    const [selectedVariant, setSelectedVariant] = useState(product.variants[0]);
 
     const image: { url: string, alt: string } = {
-        url: props.image?.url ? props.image.url : '/placeholder.png',
-        alt: props.image?.alt ? props.image.alt : 'Image does not exist'
-    }
-
-    const location: { name: string, url: string, alt: string } = {
-        name: props.location?.name ? props.location.name : 'The World',
-        url: props.location?.url ? props.location.url : '/placeholder.png',
-        alt: props.location?.alt ? props.location.alt : 'Location not specified'
+        url: selectedVariant.images?.[0].url ? selectedVariant.images[0].url : '/placeholder.png',
+        alt: selectedVariant.images?.[0].alt ? selectedVariant.images[0].alt : 'Image does not exist'
     }
 
     return (
@@ -28,15 +26,20 @@ export default (props) => {
             <div className="flex justify-between">
                 <div>
                     <div className="text-gray-500">
-                        <p>from { location.name }</p>
-                        <p>by { vendor }</p>
-                        <p>{ price }</p>
+                        <p>from { vendor.location.country }</p>
+                        <p>by { vendor.name }</p>
+                        <p>{ selectedVariant.price }</p>
                     </div>
-                    <Button className="mt-2">View</Button>
+                    <div className="mt-2 flex">
+                        <Button className="mr-2">View</Button>
+                        {variants.map((variant,index) => {
+                            return <Button className="mr-2" onMouseEnter={() => setSelectedVariant(variant)}>{index}</Button>
+                        })}
+                    </div>
                 </div>
                 <Image
-                    src={ location.url }
-                    alt={ location.alt }
+                    src={ vendor.location.image }
+                    alt={ vendor.location.country }
                     width={ 75 }
                     height={ 75 }
                     objectFit="contain"

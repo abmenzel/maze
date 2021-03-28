@@ -8,5 +8,6 @@ export interface IVariant {
         }
     ]
     price: number;
-    images: IImage[];
+    compare_price?: number;
+    images?: IImage[];
 }

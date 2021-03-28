@@ -1,9 +1,11 @@
-import { ILocation } from "./location.interface";
 import { IVariant } from "./variant.interface";
+import { IVendor } from "./vendor.interface";
 
 export interface IProduct {
     title: string;
-    description: string;
+    type: string;
+    handle: string;
+    description?: string;
     variants: IVariant[];
-    location: ILocation;
+    vendor?: IVendor;
 }
