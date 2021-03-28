@@ -8,7 +8,7 @@ export default function Home() {
         <title>Maze</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <ProductRow title="test"/>
+      <ProductRow title="These were bought this week"/>
       
     </div>
   )
